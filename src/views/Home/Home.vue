@@ -2,7 +2,7 @@
   <div class="home">
     <NavBar class="bgNav">
       <template v-slot:center>
-        <span>情情的小</span>
+        <span>情情的小商店</span>
       </template>
     </NavBar>
     <!-- 轮播图 -->
@@ -13,6 +13,8 @@
     </van-swipe>
     <!-- Recommend  -->
     <Recommend :recommend="recommend"></Recommend>
+    <FeatureView />
+    <Tab />
   </div>
 </template>
 
@@ -20,6 +22,9 @@
 <script>
 import NavBar from "../../components/common/navbar";
 import Recommend from "./children/recommend";
+import FeatureView from "./children/FeatureView";
+import Tab from "./children/Tab";
+
 export default {
   name: "home",
   data() {
@@ -31,6 +36,8 @@ export default {
   components: {
     NavBar,
     Recommend,
+    FeatureView,
+    Tab,
   },
   created() {
     this.Banner();
@@ -40,7 +47,6 @@ export default {
       this.axios.get("/home/multidata").then((res) => {
         this.banner = res.data.data.banner.list;
         this.recommend = res.data.data.recommend.list;
-        console.log(res.data);
       });
     },
   },
