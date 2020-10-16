@@ -1,12 +1,10 @@
 <template>
-  <div class="Goods">
-    <div class="goods" v-for="(Goods,index) in Goods" :key="index">
-      <img :src="Goods.show.img" alt />
-      <div class="goods-info">
-        <p>{{Goods.title}}</p>
-        <span class="price">{{Goods.price}}</span>
-        <span class="collect">{{Goods.cfav}}</span>
-      </div>
+  <div class="goods" @click="itemClick">
+    <img v-lazy="showimg" alt />
+    <div class="goods-info">
+      <p>{{ goodsItem.title }}</p>
+      <span class="price">¥{{ goodsItem.price }}</span>
+      <span class="collect">{{ goodsItem.cfav }}</span>
     </div>
   </div>
 </template>
@@ -14,21 +12,29 @@
 <script>
 export default {
   name: "GoodsItem",
-  props: ["Goods"],
+  props: ["goodsItem"],
   data() {
     return {};
   },
-
-  methods: {},
+  methods: {
+    itemClick() {
+      // this.$router.push("/detail/" + this.product.id);
+      this.$router.push({
+        path: "/detail",
+        query: {
+          iid: this.goodsItem.iid,
+        },
+      });
+    },
+  },
+  computed: {
+    showimg() {
+      return this.goodsItem.image || this.goodsItem.show.img;
+    },
+  },
 };
 </script>
 <style scoped>
-.Goods {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-bottom: 50px;
-}
 .goods {
   padding-bottom: 40px;
   position: relative;
@@ -36,7 +42,6 @@ export default {
 }
 .goods img {
   width: 100%;
-  height: 100%;
   border-radius: 5px;
 }
 

@@ -8,7 +8,8 @@ const Cart = () =>
     import ('../views//Cart/cart')
 const My = () =>
     import ('../views/My/My')
-
+const detail = () =>
+    import ('../views/Detail/Detail')
 
 const routes = [{
         path: '/',
@@ -19,6 +20,7 @@ const routes = [{
         path: '/Home',
         name: 'home',
         component: Home
+
     }, {
         path: '/search',
         name: 'search',
@@ -31,6 +33,10 @@ const routes = [{
         path: '/My',
         name: 'my',
         component: My
+    },
+    {
+        path: '/detail',
+        component: detail
     }
 ]
 

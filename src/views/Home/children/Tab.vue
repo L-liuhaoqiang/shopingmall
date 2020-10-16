@@ -1,16 +1,22 @@
 <template>
   <div class="tab">
-    <van-tabs class="TABS" @click="currentType"  title-active-color="#ff8198" color="#ff8198" v-model="active">
+    <van-tabs
+      class="TABS"
+      @click="currentType"
+      title-active-color="#ff8198"
+      color="#ff8198"
+      v-model="active"
+    >
       <van-tab title="流行"></van-tab>
       <van-tab title="精选"></van-tab>
       <van-tab title="普通"></van-tab>
     </van-tabs>
-    <Goods :Goods="goods.pop.list" />
+    <Goods :goods="GOODS" />
   </div>
 </template>
 
 <script>
-import Goods from "../../../components/common/Goods";
+import Goods from "../../../components/common/GoodsList";
 export default {
   name: "Tab",
   data() {
@@ -29,6 +35,11 @@ export default {
   },
   created() {
     this.getHomeGood("pop");
+  },
+  computed: {
+    GOODS() {
+      return this.goods[this.CurrentType].list;
+    },
   },
   methods: {
     currentType() {
@@ -51,7 +62,7 @@ export default {
 };
 </script>
 <style scoped>
-.TABS{
-    margin-bottom: 5px;
+.TABS {
+  margin-bottom: 5px;
 }
 </style>
