@@ -1,6 +1,10 @@
 <template>
   <div class="bottomsubmit">
-    <van-submit-bar :price="comprice" button-text="提交订单" @submit="onSubmit">
+    <van-submit-bar
+      :price="comprice"
+      :button-text="checkLength"
+      @submit="onSubmit"
+     class="ee">
       <van-checkbox v-model="checked">全选</van-checkbox>
     </van-submit-bar>
   </div>
@@ -27,6 +31,14 @@ export default {
           return preValue + item.price * item.count * 100;
         }, 0);
     },
+    checkLength() {
+      return (
+        "提交订单" +
+        "  (" +
+        this.getcartlist.filter((item) => item.checked).length +
+        ")"
+      );
+    },
   },
   methods: {
     onSubmit() {},
@@ -37,4 +49,5 @@ export default {
 .van-submit-bar {
   bottom: 49px;
 }
+
 </style>
