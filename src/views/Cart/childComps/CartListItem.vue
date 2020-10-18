@@ -19,7 +19,7 @@
 
 <script>
 import CheckButton from "../../../components/common/CheckBotton";
-
+import { mapGetters } from "vuex";
 export default {
   name: "CartListItem",
   props: ["itemInfo"],
@@ -28,6 +28,9 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters(["getcartlist"]),
   },
   methods: {
     onchecked() {

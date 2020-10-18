@@ -26,16 +26,20 @@ export default new Vuex.Store({
     },
     actions: {
         increment(context, product) {
-            let Oldproduct = context.state.cartList.find(item => {
-                return item.iid === product.iid
+            return new Promise((resolve, reject) => {
+                let Oldproduct = context.state.cartList.find(item => {
+                    return item.iid === product.iid
+                })
+                if (Oldproduct) {
+                    context.commit('addcount', Oldproduct)
+                    resolve('当前的商品数量+1')
+                } else {
+                    product.count = 1
+                    context.commit('addCart', product)
+                    resolve('添加购物车成功')
+                }
             })
 
-            if (Oldproduct) {
-                context.commit('addcount', Oldproduct)
-            } else {
-                product.count = 1
-                context.commit('addCart', product)
-            }
         }
     },
     modules: {}

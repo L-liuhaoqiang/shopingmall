@@ -9,6 +9,7 @@
       <detail-params-info ref="params" :paramInfo="itemParams" />
       <DetailCommentInfo ref="comment" :comment-info="commentInfo" />
       <GoodsList ref="recommend" :goods="recommends" />
+      <isAlert :isshow="Deishow" :message="ismessage" />
     </div>
     <detail-bottomBar @Cartlist="ClickCart" />
   </div>
@@ -24,6 +25,7 @@ import DetailParamsInfo from "./children/DetailParamsInfo";
 import DetailCommentInfo from "./children/DetailCommentInfo";
 import GoodsList from "../../components/common/GoodsList";
 import DetailBottomBar from "./children/DetailBottomBar";
+import isAlert from "../../components/common/toast";
 export default {
   name: "Detail",
   data() {
@@ -37,6 +39,8 @@ export default {
       commentInfo: {},
       recommends: [],
       themeTopYs: [], //Nav点击位置
+      ismessage: "",
+      Deishow: false,
     };
   },
   components: {
@@ -49,6 +53,7 @@ export default {
     DetailCommentInfo,
     GoodsList,
     DetailBottomBar,
+    isAlert,
   },
   methods: {
     ClickCart() {
@@ -58,7 +63,14 @@ export default {
       product.desc = this.goodsInfo.itemInfo.desc;
       product.price = this.goodsInfo.itemInfo.lowNowPrice;
       product.iid = this.iid;
-      this.$store.dispatch("increment", product);
+      this.$store.dispatch("increment", product).then((res) => {
+        this.ismessage = res;
+        this.Deishow = true;
+        setTimeout(() => {
+          this.ismessage = "";
+          this.Deishow = false;
+        }, 1000);
+      });
     },
     LoadImage() {
       this.themeTopYs = [];

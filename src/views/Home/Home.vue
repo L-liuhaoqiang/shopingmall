@@ -6,15 +6,16 @@
       </template>
     </NavBar>
     <!-- 轮播图 -->
+
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for="(image, index) in banner" :key="index">
-        <img v-lazy="image.image" />
+        <img v-lazy="image.image" @load="tabheight" />
       </van-swipe-item>
     </van-swipe>
     <!-- Recommend  -->
     <Recommend :recommend="recommend"></Recommend>
     <FeatureView />
-    <Tab />
+    <Tab ref="ftab" />
   </div>
 </template>
 
@@ -31,6 +32,8 @@ export default {
     return {
       banner: [],
       recommend: [],
+      Tabheight: 0,
+      isTabFixed: false,
     };
   },
   components: {
@@ -42,7 +45,22 @@ export default {
   created() {
     this.Banner();
   },
+  mounted() {
+    window.addEventListener("scroll", this.scrollToTop);
+  },
   methods: {
+    tabheight() {
+      this.Tabheight = this.$refs.ftab.$el.offsetTop;
+    },
+    scrollToTop() {
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+        // console.log(this.Tabheight)
+      this.isTabFixed = scrollTop > this.Tabheight;
+      // console.log(this.isTabFixed)
+    },
     Banner() {
       this.axios.get("/home/multidata").then((res) => {
         this.banner = res.data.data.banner.list;
@@ -55,8 +73,10 @@ export default {
 <style scoped>
 .bgNav {
   background: pink;
+  margin-bottom: 44px;
 }
 .my-swipe .van-swipe-item {
+  margin-top: 44px;
   color: #fff;
   text-align: center;
   background-color: #39a9ed;

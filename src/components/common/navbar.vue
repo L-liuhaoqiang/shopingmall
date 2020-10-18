@@ -22,12 +22,18 @@ export default {
 </script>
 <style scoped>
 .navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 100%;
   font-weight: bold;
   color: white;
   display: flex;
   height: 44px;
   line-height: 44px;
   text-align: center;
+ 
 }
 .left,
 .right {
