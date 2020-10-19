@@ -2,7 +2,7 @@
   <div class="home">
     <NavBar class="bgNav">
       <template v-slot:center>
-        <span>情情的小商店</span>
+        <span>颐堤港购物中心</span>
       </template>
     </NavBar>
     <!-- 轮播图 -->

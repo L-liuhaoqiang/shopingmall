@@ -41,6 +41,7 @@ export default {
       themeTopYs: [], //Nav点击位置
       ismessage: "",
       Deishow: false,
+      currentIndex: 0,
     };
   },
   components: {

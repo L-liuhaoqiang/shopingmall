@@ -5,7 +5,7 @@
         <span>购物车({{ getcount }})</span>
       </template>
     </navbar>
-    <cartList />
+    <cartList class="cartmargintop" />
     <bottomsibmitbar />
   </div>
 </template>
@@ -26,12 +26,12 @@ export default {
   components: {
     bottomsibmitbar,
     navbar,
-    CartList
+    CartList,
   },
 };
 </script>
 <style scoped>
-.Cart{
+.Cart {
   overflow: hidden;
 }
 .ww {
@@ -39,6 +39,9 @@ export default {
   height: 200px;
   width: 100%;
   background: red;
+}
+.cartmargintop {
+  margin-top: 44px;
 }
 .bgNav {
   background: pink;
